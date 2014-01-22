@@ -11,7 +11,7 @@ fun! PsqlLine()
   let s:start_pos = search('{{{','bcnW')
   let s:end_pos = search('}}}','cnW')
   if s:start_pos!=0 && s:end_pos!=0
-    let s:cmd= ':'.s:start_pos.','.s:end_pos.'w !psql '.s:db.' &> /tmp/sqlres.sql'
+    let s:cmd= ':'.s:start_pos.','.s:end_pos.'w !psql '.s:db.' > /tmp/sqlres.sql'
     "echo cmd
     exec s:cmd
     ped /tmp/sqlres.sql
@@ -45,4 +45,3 @@ fun! Qb()
 endfun
 
 command! Qb call Qb()
-imap
