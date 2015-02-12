@@ -11,7 +11,7 @@ fun! PsqlLine()
   let s:start_pos = search('{{{','bcnW')
   let s:end_pos = search('}}}','cnW')
   if s:start_pos!=0 && s:end_pos!=0
-    let s:cmd= ':'.s:start_pos.','.s:end_pos.'w !psql '.s:db.' > /tmp/sqlres.sql'
+    let s:cmd= ':'.s:start_pos.','.s:end_pos.'w !psql '.s:db.' > /tmp/sqlres.sql 2>&1'
     "echo cmd
     exec s:cmd
     ped /tmp/sqlres.sql
@@ -20,7 +20,7 @@ endfun
 
 fun! PsqlExec(cmd)
   let s:db=s:get_db()
-  silent exec '!echo "'.a:cmd.'" | psql '.s:db.' &2> /tmp/sqlres.sql'
+  silent exec '!echo "'.a:cmd.'" | psql '.s:db.' > /tmp/sqlres.sql 2>&1'
   silent ped /tmp/sqlres.sql
 endfun
 
